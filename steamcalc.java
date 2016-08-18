@@ -8,20 +8,21 @@ import java.io.Console;
 //public classes must always share their names with the file
 public class steamcalc
 {
-  //as the main class, steamcalc must have a main method
+  	//as the main class, steamcalc must have a main method
 	public static void main(String args[])
 	{
-	  //create and retrieve the I/O objects
+		//create and retrieve the I/O objects
 		Scanner reader = new Scanner(System.in);
 		Console c = System.console();
 
-    //System.console() can return null. Check for this and make sure that c is non-null
+    		//System.console() can return null. Check for this and make sure that c is non-null
 		if(c != null)
-		{ //as the below while loop is the only statement following the if statement, I can leave out the curly brackets entirely.
-	    //I choose not to, however, largely out of habit
+		{
+			//as the below while loop is the only statement following the if statement, I can leave out the curly brackets entirely.
+			//I choose not to, however, largely out of habit
 	    
-	    boolean again = true;
-			while(again)  //and again, and again, and again, and again...
+			boolean loopAgain = true;
+			while(loopAgain)  //and again, and again, and again, and again...
 			{
 				c.printf("Enter your cut and I will give you the final price\n");
 				c.printf("==> ");
@@ -31,24 +32,30 @@ public class steamcalc
 				
 				if( !input.equals("##") )
 				{
-  				try
+  					try
+	  				{
+	  					inNum = Double.valueOf(input);
+	  				}catch(Exception e)
+	  				{
+	  					//Double.valueOf will simply throw an exception if it cannot parse a string
+	  					//I can use this to check for a valid input.
+	  					c.printf("Sorry, that was not a valid input.\n\n");
+	  					continue;
+	  				}
+	  				double addValve = inNum * 0.05;
+	  				double addComp = inNum * 0.1;
+	  				if(addValve < 0.01)
+	  					addValve = 0.01;
+	  				
+	  				if(addComp < 0.01)
+	  					addComp = 0.01;
+	  				
+	  				c.printf("Steam will charge the buyer %1$.2f.\n\n",inNum + addValve + addComp);
+  				}else
   				{
-  					inNum = Double.valueOf(input);
-  				}catch(NullPointerException npe)
-  				{
-  					continue;
+  					//Curly brackets added for readability
+  					again = false;
   				}
-  				double addValve = inNum * 0.05;
-  				double addComp = inNum * 0.1;
-  				if(addValve < 0.01)
-  					addValve = 0.01;
-  				
-  				if(addComp < 0.01)
-  					addComp = 0.01;
-  				
-  				c.printf("Steam will charge the buyer %1$.2f.\n\n",inNum + addValve + addComp);
-  			}else
-  			  again = false;
 			}
 		}
 	}
