@@ -1,30 +1,25 @@
-//imports
 import java.util.Scanner;
 import java.io.Console;
 
 /*In Java, I can put this program into a package for if/when I toss it into an archive.
  *I have chosen to leave it in the default package because there is just this source file.*/
 
-//public classes must always share their names with the file
 public class steamcalc
 {
-  	//as the main class, steamcalc must have a main method
-	public static void main(String args[])
+  	public static void main(String args[])
 	{
-		//create and retrieve the I/O objects
 		Scanner reader = new Scanner(System.in);
 		Console c = System.console();
 
-    		//System.console() can return null. Check for this and make sure that c is non-null
+    		//System.console() can return null.
 		if(c != null)
 		{
-			//as the below while loop is the only statement following the if statement, I can leave out the curly brackets entirely.
-			//I choose not to, however, largely out of habit
+			//Curly brackets added for readability
 	    
 			boolean loopAgain = true;
-			while(loopAgain)  //and again, and again, and again, and again...
+			while(loopAgain)
 			{
-				c.printf("Enter your cut and I will give you the final price\n");
+				c.printf("Please enter what you expect to recieve\n");
 				c.printf("==> ");
 
 				double inNum = 0.0;
@@ -37,8 +32,6 @@ public class steamcalc
 	  					inNum = Double.valueOf(input);
 	  				}catch(Exception e)
 	  				{
-	  					//Double.valueOf will simply throw an exception if it cannot parse a string
-	  					//I can use this to check for a valid input.
 	  					c.printf("Sorry, that was not a valid input.\n\n");
 	  					continue;
 	  				}
@@ -50,7 +43,7 @@ public class steamcalc
 	  				if(addComp < 0.01)
 	  					addComp = 0.01;
 	  				
-	  				c.printf("Steam will charge the buyer %1$.2f.\n\n",inNum + addValve + addComp);
+	  				c.printf("For %1$.2f, Steam will charge the buyer %1$.2f.\n\n",inNum + addValve + addComp);
   				}else
   				{
   					//Curly brackets added for readability
